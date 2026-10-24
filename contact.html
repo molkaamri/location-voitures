@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html lang="fr"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <title>Contact et réservation | AutoPrestige</title> <style> *{box-sizing:border-box} body{margin:0;font-family:Arial,sans-serif;background:#f5f6f8;color:#172238} header{background:#101d35;color:white;padding:18px 5%;display:flex;justify-content:space-between;align-items:center;gap:15px} .logo{color:#f5b400;font-size:23px;font-weight:bold} nav{display:flex;gap:18px;flex-wrap:wrap} nav a{color:white;text-decoration:none;font-size:13px} nav a:hover{color:#f5b400} main{max-width:650px;margin:35px auto;padding:0 18px} .form-box{background:white;padding:28px;border-radius:12px;box-shadow:0 4px 20px #00000010} h1{font-size:27px;margin:0 0 8px} .intro{font-size:13px;color:#707784;margin-bottom:25px} label{display:block;font-size:13px;font-weight:bold;margin:15px 0 7px} input,select,textarea{width:100%;padding:12px;border:1px solid #d8dce3;border-radius:6px;font-size:14px;font-family:Arial} input:focus,select:focus,textarea:focus{outline:2px solid #e9b323;border-color:#e9b323} .row{display:grid;grid-template-columns:1fr 1fr;gap:14px} button{width:100%;border:0;border-radius:6px;background:#101d35;color:white;padding:14px;font-size:15px;font-weight:bold;cursor:pointer;margin-top:22px} button:hover{background:#c18b00} .note{font-size:12px;color:#777;line-height:1.5;margin-top:15px} footer{background:#101d35;color:white;text-align:center;padding:18px;margin-top:30px;font-size:12px} @media(max-width:600px){header{flex-direction:column}.row{grid-template-columns:1fr}.form-box{padding:20px}} </style> </head> <body> <header> <div class="logo">AutoPrestige.</div> <nav> <a href="index.html">Accueil</a> <a href="voitures.html">Voitures</a> <a href="services.html">Services</a> <a href="contact.html">Contact</a> </nav> </header>
+
+<main> <div class="form-box"> <h1>Réservation & Contact</h1> <p class="intro">Remplissez le formulaire pour envoyer votre demande de location.</p>
+
+<form id="reservationForm"> <label for="nom">Nom complet *</label> <input type="text" id="nom" name="nom" placeholder="Votre nom" required>
+
+<div class="row"> <div> <label for="telephone">Téléphone *</label> <input type="tel" id="telephone" name="telephone" placeholder="Votre numéro" required> </div> <div> <label for="email">E-mail</label> <input type="email" id="email" name="email" placeholder="Votre e-mail"> </div> </div>
+
+<label for="voiture">Voiture souhaitée *</label> <select id="voiture" name="voiture" required>
+
+<option value="">Choisir une voiture</option> <option>Porsche 911</option> <option>Berline confort</option> <option>Chevrolet Camaro</option> <option>SUV familial</option> <option>Citadine moderne</option> </select>
+
+<div class="row"> <div> <label for="depart">Date de départ *</label> <input type="date" id="depart" name="depart" required> </div> <div> <label for="retour">Date de retour *</label> <input type="date" id="retour" name="retour" required> </div> </div>
+
+<label for="message">Message</label>
+
+<textarea id="message" name="message" rows="3" placeholder="Votre message (facultatif)"></textarea>
+
+<button type="submit">Envoyer la demande</button>
+
+<p class="note">Votre demande doit être confirmée par notre agence. L'envoi réel nécessite de connecter ce formulaire à un service de réception.</p> </form> </div> </main>
+
+<footer> <p>&copy; 2026 AutoPrestige — Location de voitures</p> </footer>
+
+<script> const params = new URLSearchParams(window.location.search); const voiture = params.get("voiture"); if (voiture) { document.getElementById("voiture").value = voiture; } document.getElementById("depart").min = new Date().toISOString().split("T")[0]; document.getElementById("depart").addEventListener("change", function () { document.getElementById("retour").min = this.value; if (document.getElementById("retour").value < this.value) { document.getElementById("retour").value = ""; } }); document.getElementById("reservationForm").addEventListener("submit", function (event) { event.preventDefault(); const depart = document.getElementById("depart").value; const retour = document.getElementById("retour").value; if (retour < depart) { alert("La date de retour doit être après la date de départ."); return; } alert("Votre formulaire est prêt ! Pour recevoir les demandes, il faut connecter le site à un service d'envoi."); }); </script>
+
+</body> </html>
